@@ -1,0 +1,104 @@
+@import "../colors";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+ 
+.containerSidebar{
+    display: flex;
+    color: $textColor;
+    font-family: "Roboto Mono", monospace;
+}
+.top_sectionSidebar{
+    display: flex;
+    h2{
+        font-size: 20px;
+    }
+}
+
+.mainSidebar{
+    width: 100%;
+    padding: 20px;
+    background: rgb(41, 40, 40);
+}
+.sidebar{
+    background: $sidebar;
+    color: $textColor;
+    height: 100vh;
+    width: 300px;
+}
+
+.top_sectionSidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 15px;
+    img{
+        margin-top: 20px ;
+        width: 80px;
+        border-radius: 50%;
+        border: solid 2px $variantColor;
+    }
+}
+
+.barsSidebar{
+    display: flex;
+    font-size: 25px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.iconoSidebar{
+    display: flex;
+    
+}
+
+.linkSidebar{
+    display: flex;
+    color: $textColor;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+    text-decoration: none;
+}
+
+.linkSidebar:hover{
+    background: $hover;
+    color: $sidebar;
+    transition: all 0.5s;
+    
+}
+
+.active{
+    background: $hover;
+    color: $sidebar;
+}
+
+.iconSidebar, .link_textSidebar{
+    font-size: 20px;
+    
+}
+
+.logout{
+    
+    display: flex;
+    position: absolute;
+    bottom: 30px;
+    width: 300px;
+    font-size: 20px;
+    padding: 10px 15px;
+    a{  
+        text-decoration: none;
+        display: flex;
+        list-style: none;
+        color: $textColor;
+    }
+    i{
+        padding-right: 15px;
+    }
+}
+
+.logout:hover{
+    a{
+        color: $sidebar;
+    }
+    background: $hover;
+    color: $sidebar;
+}

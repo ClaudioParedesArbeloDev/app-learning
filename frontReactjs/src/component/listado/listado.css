@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.listadoWrapper {
+  font-family: "Roboto Mono", monospace;
+  color: #fff;
+  margin: 20px 0 10px 80px;
+}
+.listadoWrapper h2 {
+  color: #fff;
+  padding-bottom: 20px;
+}
+.listadoWrapper table {
+  border: 1px solid #fff;
+}
+.listadoWrapper table th {
+  text-align: start;
+  padding: 15px 15px 15px 15px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #007ea7;
+}
+.listadoWrapper table td {
+  font-size: 1rem;
+  padding: 15px;
+  border-left: 1px solid #fff;
+}
+.listadoWrapper table button {
+  background-color: #007ea7;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+.listadoWrapper table button a {
+  text-decoration: none;
+  color: #fff;
+}
+.listadoWrapper table button:hover {
+  background-color: #003459;
+}/*# sourceMappingURL=listado.css.map */

@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.wrapperFormulario {
+  display: flex;
+  width: 100%;
+  height: 65vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.formularioContacto {
+  border: 2px solid #003459;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  padding: 60px;
+}
+
+.formContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  padding: 20px;
+  gap: 10px;
+  width: 1000px;
+  font-family: "Lato", sans-serif;
+}
+
+.box-info {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.box-info h1 {
+  font-size: 2rem;
+  text-align: left;
+  letter-spacing: 5px;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.data p {
+  font-size: 1rem;
+}
+.data p i {
+  color: #007ea7;
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+.linkF {
+  display: flex;
+  gap: 15px;
+}
+.linkF a {
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  background: #007ea7;
+  text-align: center;
+  transition: 0.3s;
+}
+.linkF a i {
+  color: #fff;
+  line-height: 40px;
+  font-size: 20px;
+}
+.linkF a:hover {
+  background: #003459;
+}
+
+.formContacto {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 15px;
+}
+.formContacto button {
+  background: #007ea7;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px;
+  transition: 0.2s;
+}
+.formContacto button:hover {
+  background: #003459;
+}
+
+.input-boxF {
+  position: relative;
+}
+.input-boxF input {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 3px solid transparent;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  color: #fff;
+}
+.input-boxF input:focus {
+  border-bottom: 3px solid #007ea7;
+  animation: shake 0.2s;
+}
+.input-boxF input:focus ~ i {
+  color: #007ea7;
+}
+.input-boxF input::-moz-placeholder {
+  color: #a3a3a3;
+}
+.input-boxF input::placeholder {
+  color: #a3a3a3;
+}
+.input-boxF textarea {
+  width: 100%;
+  height: 130px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 3px solid transparent;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  color: #fff;
+  padding: 10px;
+  outline: none;
+}
+.input-boxF textarea:focus {
+  border-bottom: 3px solid #007ea7;
+  animation: shake 0.2s;
+}
+.input-boxF textarea::-moz-placeholder {
+  color: #a3a3a3;
+}
+.input-boxF textarea::placeholder {
+  color: #a3a3a3;
+}
+.input-boxF i {
+  color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+@media screen and (max-width: 900px) {
+  .wrapperFormulario {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    justify-content: center;
+  }
+  .formularioContacto {
+    display: flex;
+    width: 90%;
+    padding: 10px;
+  }
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  .box-info {
+    display: flex;
+    gap: 20px;
+  }
+  .box-info h1 {
+    font-size: 1rem;
+  }
+  .data {
+    gap: 10px;
+  }
+  .data p {
+    font-size: 0.7rem;
+  }
+  .linkF {
+    gap: 10px;
+  }
+  .linkF a {
+    width: 30px;
+    height: 30px;
+  }
+  .linkF a i {
+    line-height: 30px;
+  }
+}/*# sourceMappingURL=contacto.css.map */

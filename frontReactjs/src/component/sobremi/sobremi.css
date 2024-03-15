@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Shadow&display=swap");
+.bodyAboutme {
+  height: 100vh;
+  background-image: none;
+  background-color: #00171f;
+  font-family: "Poppins", sans-serif;
+}
+
+.mainAbout {
+  margin: 20px 60px 0 80px;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.pOne {
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
+  gap: 0.2em;
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.grid-item {
+  font-family: "Londrina Shadow", sans-serif;
+  padding: 0.2em;
+}
+
+.pTwo {
+  padding: 30px 40px 10px 40px;
+  font-family: "Roboto Mono", monospace;
+  line-height: 2.5rem;
+}
+.pTwo p {
+  text-indent: 20px;
+  font-size: 1rem;
+  text-align: justify;
+  padding-bottom: 15px;
+}
+
+@media screen and (max-width: 900px) {
+  .bodyAboutme {
+    background-color: #00171f;
+  }
+  .mainAbout {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  .pOne {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    padding-top: 10px;
+  }
+  .pTwo p {
+    font-size: 0.8rem;
+  }
+}/*# sourceMappingURL=sobremi.css.map */
