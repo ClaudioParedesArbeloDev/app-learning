@@ -24,10 +24,6 @@ app.use(session({
     store: MongoStore.create({
             mongoUrl: MONGODB_URI,
             dbName,
-            mongoOptions:{
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            },
             ttl: 15 // Tiempo de vida (en segundos) de la sesión
     }),
     secret: SECRET, // Clave secreta para firmar la sesión
