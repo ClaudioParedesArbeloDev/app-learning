@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { FaBars, FaUser,FaLayerGroup, FaBook, FaCommentDots, FaBell  } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
@@ -15,22 +15,19 @@ const Sidebar = ({children}) => {
     
     const { logout } = useAuth();
 
-    const [user, setUser] = useState({});
-        
-        
-        
-        useEffect(() => {
-            
+   
             //Obtiene los datos de la base de datos                
-            axios.get(`http://localhost:8000/api/profile`)
+    axios.get(`http://localhost:8000/api/profile`, {withCredentials:true})
             .then(response => {
-                setUser(response.data);
+                const userProfile = response.data;
+                response userProfile
+                
             })
             .catch(error => {
-                console.error('Error al obtener la ficha individual:', error);
+                console.error('Error al cargar el usuario:', error);
                 
             });
-        },[])
+        
     
     
     
@@ -69,7 +66,7 @@ const Sidebar = ({children}) => {
                             <FaBars className='iconoSidebar' style={{marginLeft: isOpen ? "200px" : "0px"}} onClick={toggle}/>
                     </div>
                     <img src="/img/avatar.png" alt="" style={{width: isOpen ? "100px" : "40px"}}/>
-                    <h2 style={{display: isOpen ? "block" : "none"}}>Nombre Apellido</h2>
+                    <h2 style={{display: isOpen ? "block" : "none"}}>{userProfile.nombre} Apellido</h2>
                 </div>
                 {
                     menuItem.map((item, index) =>(
