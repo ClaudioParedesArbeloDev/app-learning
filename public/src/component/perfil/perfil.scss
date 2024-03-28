@@ -1,0 +1,52 @@
+@import "../colors";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap');
+
+
+.mainPerfil{
+    padding: 70px;
+    display: grid;
+    flex-direction: column;
+}
+
+.encabezadoPerfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatarPerfil{
+    width: 200px;
+    border: solid 3px $variantColor;
+    margin: 25px;
+}
+
+.btnPerfil{
+    background: transparent;
+    color: $textColor;
+    padding: 5px;
+    border: solid 1px $variantColor;
+    border-radius: 10px;
+    font-size: .7em;
+    width: 120px;
+    margin: 5px 0 10px ;
+}
+
+.datosIndividuo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btnAvatar{
+    label{
+        color: $textColor;
+        background: transparent;
+        border: solid 2px $variantColor;
+        padding: 5px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        
+    }
+}
+

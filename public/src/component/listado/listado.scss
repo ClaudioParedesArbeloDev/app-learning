@@ -1,0 +1,42 @@
+@import "../colors";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+
+
+.listadoWrapper{
+    font-family: 'Roboto Mono', monospace;
+    color: $textColor;
+    margin: 20px 0 10px 80px;
+    h2{
+        color: $textColor;
+        padding-bottom: 20px;
+    }
+    table{
+        border: 1px solid $textColor;
+        th{
+           text-align: start;
+           padding: 15px 15px 15px 15px;
+           border-left: 1px solid $textColor;
+           border-bottom: 1px solid $variantColor;
+        }
+        td{
+            font-size: 1rem;
+            padding: 15px;
+            border-left: 1px solid $textColor;
+        }
+        button{
+            background-color: $variantColor;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            cursor: pointer;
+            
+            a{
+                text-decoration: none;
+                color: $textColor;
+            }
+        }
+        button:hover{
+            background-color: $secondaryColor;
+        }
+    }
+}

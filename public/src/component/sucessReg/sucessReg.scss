@@ -1,0 +1,30 @@
+@import "../colors";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+
+.registroCompletado{
+    
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto Mono', monospace;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    font-size: 1.5rem;
+    color: $textColor;
+    p{
+        padding-top: 30px;
+        font-size: 1rem;
+    }
+}
+@media screen and (max-width: 900px) {
+    .registroCompletado{
+        h2{
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        p{
+            font-size: .8rem;
+            text-align: center;
+        }
+    }
+}

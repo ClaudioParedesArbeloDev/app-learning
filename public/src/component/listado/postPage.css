@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.postPage {
+  margin: 15px;
+}
+.postPage select {
+  color: #fff;
+  background: transparent;
+  padding: 5px;
+  border: 1px solid #007ea7;
+}
+.postPage select option {
+  background: #00171f;
+}/*# sourceMappingURL=postPage.css.map */

@@ -1,0 +1,172 @@
+@import "../colors";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+
+
+.individualPage{
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto Mono', monospace;
+    margin-top: 100px;
+}
+
+.wrapperIndividual{
+    border: 1px solid $variantColor;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px $secondaryColor;
+    border-radius: 20px;
+    color: $textColor;
+}
+
+.avatar{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    object-fit: cover;
+    border: 1px solid $variantColor;
+    border-radius: 100px;
+    margin: 0 0 30px 0;
+}
+
+.avatar:hover{
+    border: 1px solid $secondaryColor;
+    box-shadow:  0 0 30px rgba(177, 12, 67, 0.5);
+    transform: scale(120%);
+    transition: .5s;
+}
+
+.tablaGeneral{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 15px;
+    padding: 10px 0 10px 0;
+}
+
+.datosIndividuo{
+    grid-column: 2;
+    p{
+        padding: 10px 0 10px 0;
+    }
+    
+}
+
+.encabezadosIndividuo{
+    grid-column: 1;
+    p{
+        padding: 10px 0 10px 0;
+    }
+}
+
+.btnUpdate{
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    button{
+        background: transparent;
+        border: none;
+        color: $variantColor;
+        font-family: 'Roboto Mono', monospace;
+        font-size: 1em;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    button:hover{
+        color: $secondaryColor;
+    }
+}
+
+.btnIndividuos{
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
+    color: $secondaryColor;
+    cursor: pointer;
+}
+
+.frenteDNI, .dorsoDNI{
+    border: none;
+    background-color: $secondaryColor;
+    color: $textColor;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    a{
+        text-decoration: none;
+        text-transform: uppercase;
+        color: $textColor;
+    }
+}
+
+.frenteDNI:hover{
+    background-color: $variantColor;
+} 
+
+.dorsoDNI:hover{
+    background-color: $variantColor;
+}
+
+.deleteBTN{
+    border: 1px solid $variantColor;
+    background-color: $secondaryColor;
+    color: $textColor;
+    padding: 10px;
+    margin: 10px 10px 10px 100px;
+    font-weight: bold;
+    cursor: pointer;
+    a{
+        text-decoration: none;
+        color: $textColor;
+        i{
+        font-size: 30px;
+        }
+    }
+}
+
+.deleteBTN:hover{
+    background-color: crimson;
+    transition: .3s;
+    transform: scale(120%);
+}
+
+.wrapperBtnListado{
+    display: flex;
+    justify-content: center;
+}
+
+.btnListado{
+    border: none;
+    background-color: $variantColor;
+    color: $textColor;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    a{
+        text-decoration: none;
+        text-transform: uppercase;
+        color: $textColor;
+    }
+}
+
+.btnListado:hover{
+    background-color: $secondaryColor;
+    transition: .3s;
+}
+
+
+.swal2-popup {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.cursosOptions{
+   background: transparent;
+   color: $variantColor;
+   padding: 5px;
+   border: none;
+       
+}
+   

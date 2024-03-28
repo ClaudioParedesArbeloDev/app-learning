@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.modalBackground {
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background: transparent;
+}
+.modalContainer button {
+  display: flex;
+  justify-content: flex-end;
+  background: transparent;
+  border: none;
+}
+.modalContainer button i {
+  font-size: 2em;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modalTitle {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+  font-size: 1.3em;
+}
+
+.modalBody {
+  display: flex;
+  justify-content: center;
+}
+.modalBody img {
+  width: 400px;
+}/*# sourceMappingURL=modal.css.map */

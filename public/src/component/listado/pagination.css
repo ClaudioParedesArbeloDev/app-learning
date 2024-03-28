@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.pagination {
+  display: flex;
+  padding: 15px;
+}
+.pagination p {
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+}/*# sourceMappingURL=pagination.css.map */

@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.individualPage {
+  display: flex;
+  justify-content: center;
+  font-family: "Roboto Mono", monospace;
+  margin-top: 100px;
+}
+
+.wrapperIndividual {
+  border: 1px solid #007ea7;
+  padding: 40px;
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px #003459;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 1px solid #007ea7;
+  border-radius: 100px;
+  margin: 0 0 30px 0;
+}
+
+.avatar:hover {
+  border: 1px solid #003459;
+  box-shadow: 0 0 30px rgba(177, 12, 67, 0.5);
+  transform: scale(120%);
+  transition: 0.5s;
+}
+
+.tablaGeneral {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 15px;
+  padding: 10px 0 10px 0;
+}
+
+.datosIndividuo {
+  grid-column: 2;
+}
+.datosIndividuo p {
+  padding: 10px 0 10px 0;
+}
+
+.encabezadosIndividuo {
+  grid-column: 1;
+}
+.encabezadosIndividuo p {
+  padding: 10px 0 10px 0;
+}
+
+.btnUpdate {
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+}
+.btnUpdate button {
+  background: transparent;
+  border: none;
+  color: #007ea7;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.btnUpdate button:hover {
+  color: #003459;
+}
+
+.btnIndividuos {
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  color: #003459;
+  cursor: pointer;
+}
+
+.frenteDNI, .dorsoDNI {
+  border: none;
+  background-color: #003459;
+  color: #fff;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.frenteDNI a, .dorsoDNI a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.frenteDNI:hover {
+  background-color: #007ea7;
+}
+
+.dorsoDNI:hover {
+  background-color: #007ea7;
+}
+
+.deleteBTN {
+  border: 1px solid #007ea7;
+  background-color: #003459;
+  color: #fff;
+  padding: 10px;
+  margin: 10px 10px 10px 100px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.deleteBTN a {
+  text-decoration: none;
+  color: #fff;
+}
+.deleteBTN a i {
+  font-size: 30px;
+}
+
+.deleteBTN:hover {
+  background-color: crimson;
+  transition: 0.3s;
+  transform: scale(120%);
+}
+
+.wrapperBtnListado {
+  display: flex;
+  justify-content: center;
+}
+
+.btnListado {
+  border: none;
+  background-color: #007ea7;
+  color: #fff;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+.btnListado a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.btnListado:hover {
+  background-color: #003459;
+  transition: 0.3s;
+}
+
+.swal2-popup {
+  font-family: "Roboto Mono", monospace;
+}
+
+.cursosOptions {
+  background: transparent;
+  color: #007ea7;
+  padding: 5px;
+  border: none;
+}/*# sourceMappingURL=fichaind.css.map */

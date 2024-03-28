@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.containerSidebar {
+  display: flex;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  width: 100%;
+  flex: 0 0 auto;
+  z-index: 1;
+}
+
+.top_sectionSidebar {
+  display: flex;
+  flex-direction: column;
+}
+.top_sectionSidebar h2 {
+  font-size: 15px;
+}
+
+.mainSidebar {
+  width: 100%;
+  padding: 20px;
+  /* background: rgb(41, 40, 40); */
+}
+
+.sidebar {
+  background: rgba(28, 31, 48, 0.4);
+  color: #fff;
+  height: 100vh;
+  width: 300px;
+}
+
+.top_sectionSidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 15px;
+}
+.top_sectionSidebar img {
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  border: solid 2px #007ea7;
+}
+
+.barsSidebar {
+  display: flex;
+  font-size: 25px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.iconoSidebar {
+  display: flex;
+}
+
+.linkSidebar {
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+  text-decoration: none;
+}
+
+.linkSidebar:hover {
+  background: #87cefa;
+  color: #00171f;
+  transition: all 0.5s;
+}
+
+.active {
+  background: #87cefa;
+  color: #00171f;
+}
+
+.iconSidebar, .link_textSidebar {
+  font-size: 20px;
+}
+
+.logout {
+  display: flex;
+  position: absolute;
+  bottom: 30px;
+  width: 300px;
+  font-size: 20px;
+  padding: 10px 15px;
+}
+.logout a {
+  text-decoration: none;
+  display: flex;
+  list-style: none;
+  color: #fff;
+}
+.logout i {
+  padding-right: 15px;
+}
+
+.logout:hover {
+  background: #87cefa;
+  color: rgba(41, 44, 62, 0);
+}
+.logout:hover a {
+  color: #00171f;
+}
+
+.contentArea {
+  flex-grow: 1;
+  background-color: #1e2131;
+}/*# sourceMappingURL=sidebar.css.map */

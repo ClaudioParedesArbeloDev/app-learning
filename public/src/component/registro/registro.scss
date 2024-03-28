@@ -1,0 +1,161 @@
+@import "../colors";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+
+.registerPage{
+   
+    background-size: cover;
+    color: $textColor;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+.formRegistro{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-top: 60px;
+    padding-left: 90px;
+    text-align: center;
+    gap: 15px;
+    button{
+        background: $variantColor;
+        color: $textColor;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 10px;
+        transition: .05s;
+    }
+    button:hover{
+        background: $secondaryColor;
+    }
+}
+
+.input-boxR{
+    position: relative;
+    input{
+        width: 100%;
+        height: 40px;
+        padding: 0 10px;
+        outline: none;
+        background: rgba(255, 255, 255, .1);
+        border: 3px solid transparent;
+        letter-spacing: 1px;
+        transition: .05s;
+        color: $textColor;
+    }
+    input:focus{
+        border-bottom: 3px solid $variantColor;
+        animation: shake .2s;
+    }
+    input:focus ~ i{
+        color: $variantColor;
+    }
+    input::placeholder{
+        color: #a3a3a3;
+    }
+    textarea{
+        width: 100%;
+        height: 130px;
+        background: rgba(255, 255, 255, .1);
+        border: 3px solid transparent;
+        letter-spacing: 1px;
+        transition: .3s;
+        color: $textColor;
+        padding: 10px;
+        outline: none;
+    }
+    textarea:focus{
+        border-bottom: 3px solid $variantColor;
+        animation: shake .1s;
+    }
+    textarea::placeholder{
+        color: #a3a3a3;
+    }
+    i{
+        color: rgba(255, 255, 255, .3);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 15px;
+    }
+}
+
+.advertenciaTamano{
+    font-family: 'Roboto Mono', monospace;
+    color: #a3a3a3;
+    text-align: start;
+    font-size: .7rem;
+}
+
+.custom-file-upload {
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    width: 200px;
+    overflow: hidden;
+    margin-right: 10px; 
+    padding: 10px 20px; 
+    background-color: $variantColor; 
+    color: $textColor; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+  }
+  .custom-file-upload:hover{
+    background: $secondaryColor;
+  }
+  .custom-file-upload input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px; 
+    cursor: pointer; 
+    opacity: 0; 
+  }
+    
+
+.submitForm{
+    width: 200px;
+    
+}
+
+.errorsForm{
+    color: crimson;
+    font-family: 'Roboto Mono', monospace;
+    font-size: .8em;
+    
+}
+
+
+.swal2-popup {
+    font-family: 'Roboto Mono', monospace;
+    background: $primaryColor;
+    border: solid 2px $secondaryColor;
+    border-radius: 20px;
+    color: $textColor;
+    width: 350px;
+    h2{
+        font-size: 1.3em;
+    }
+
+}
+
+@keyframes shake{
+    0%, 100%{transform: translateY(0);}
+    10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+    20%, 40%, 60%, 80% {transform: translateX(10px);}
+}
+
+  
+@media screen and (max-width: 900px) {
+    .formRegistro{
+        width: 90%;
+        padding: 20px 0 0 15px;
+    }
+}

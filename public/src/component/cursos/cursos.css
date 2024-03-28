@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.cursoFrontEnd {
+  background-image: url(../../../public/img/pexels-danny-meneses-943096.jpg);
+  background-size: cover;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0 450px 0;
+}
+.cursoFrontEnd h2 {
+  font-size: 2.7em;
+  padding: 140px 0 0 150px;
+}
+
+.partCurso {
+  list-style: none;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.8em;
+  width: 520px;
+  padding: 30px 0 0 150px;
+}
+.partCurso i {
+  padding-right: 20px;
+}
+
+.desarrolloWeb {
+  display: flex;
+  flex-direction: column;
+  background-image: url(../../../public/img/pexels-jess-bailey-designs-1097930.jpg);
+  background-size: cover;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  padding: 100px 0 200px 0;
+  text-align: center;
+}
+.desarrolloWeb h3 {
+  color: #00171f;
+  font-size: 2em;
+  line-height: 3em;
+}
+.desarrolloWeb h3 i {
+  padding-right: 20px;
+}
+.desarrolloWeb p {
+  color: #00171f;
+  font-size: 1.5em;
+  line-height: 1.5em;
+}
+
+.javaScript {
+  display: flex;
+  flex-direction: column;
+  background-image: url(../../../public/img/pexels-sebastiaan-stam-1480690.jpg);
+  background-size: cover;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  padding: 150px 0 200px 0;
+}
+.javaScript h3 {
+  padding-left: 100px;
+  font-size: 2em;
+  line-height: 3em;
+}
+.javaScript h3 i {
+  padding-right: 20px;
+}
+.javaScript p {
+  padding-left: 100px;
+  font-size: 1.5em;
+  line-height: 1.5em;
+}
+
+.reactJs {
+  display: flex;
+  flex-direction: column;
+  background-image: url(../../../public/img/blog-thumb-1.png);
+  background-size: cover;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  padding: 100px 0 150px 0;
+}
+.reactJs h3 {
+  padding-left: 100px;
+  font-size: 2em;
+  line-height: 3em;
+}
+.reactJs h3 i {
+  padding-right: 20px;
+}
+.reactJs p {
+  padding-left: 100px;
+  font-size: 1.5em;
+  line-height: 2.5em;
+}
+
+.up {
+  position: fixed;
+  right: 30px;
+  top: 730px;
+}
+.up i {
+  color: #dbd1d1;
+  font-size: 3em;
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    background-color: #00171f;
+    background-image: none;
+  }
+  .up {
+    top: 380px;
+  }
+  .up i {
+    font-size: 2em;
+  }
+  .partCurso {
+    width: 90vw;
+  }
+  .cursoFrontEnd {
+    background-image: none;
+    background-color: #00171f;
+  }
+  .cursoFrontEnd h2 {
+    padding: 50px 10px 30px 30px;
+    font-size: 1.8em;
+  }
+  .cursoFrontEnd a {
+    padding: 0 0 0 30px;
+    font-size: 1em;
+    line-height: 3em;
+  }
+  .desarrolloWeb h3 {
+    font-size: 1.7em;
+  }
+  .desarrolloWeb p {
+    font-size: 1em;
+  }
+  .javaScript {
+    padding: 90px 0 150px 0;
+  }
+  .javaScript h3 {
+    padding: 0 0 0 30px;
+    font-size: 1.7em;
+  }
+  .javaScript p {
+    padding: 0 0 0 30px;
+    font-size: 1em;
+  }
+  .reactJs {
+    padding: 40px 0 150px 0;
+  }
+  .reactJs h3 {
+    padding: 0 0 0 30px;
+    font-size: 1.7em;
+  }
+  .reactJs p {
+    padding: 0 0 0 30px;
+    font-size: 1em;
+  }
+}/*# sourceMappingURL=cursos.css.map */

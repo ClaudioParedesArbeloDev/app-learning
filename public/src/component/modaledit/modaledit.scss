@@ -1,0 +1,45 @@
+@import "../colors";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+
+
+.modalEdit{
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    right: 700px;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    width: 500px;
+    height: 400px;
+    border: solid 1px $variantColor;
+    border-radius: 10px;
+}
+
+
+.inputEdit{
+    background: $primaryColor;
+    border: solid 1px $variantColor;
+    color: $textColor;
+    font-size: 1.2em;
+    font-family: 'Roboto Mono', monospace;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btnEditClose{
+    background: transparent;
+    border: none;
+    i{
+        font-size: 2.5em;
+        color: $textColor;
+        
+    }
+}
+
+.editAceptar{
+    color: crimson;
+    font-size: 2em;
+    
+}

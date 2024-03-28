@@ -1,0 +1,181 @@
+@import "../colors";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+
+
+
+.cursoFrontEnd{
+    background-image: url(../../../public/img/pexels-danny-meneses-943096.jpg);
+    background-size: cover;
+    color: $textColor;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0 450px 0;
+    h2{
+      font-size: 2.7em;
+      padding: 140px 0 0 150px;
+  
+    }
+  }
+  
+  .partCurso{
+      list-style: none;
+      text-decoration: none;
+      color: $textColor;
+      font-size: 1.8em;
+      width: 520px;
+      padding: 30px 0 0 150px;
+      i{
+        padding-right: 20px;
+      }
+  }
+  
+  .desarrolloWeb{
+    display: flex;
+    flex-direction: column;
+    background-image: url(../../../public/img/pexels-jess-bailey-designs-1097930.jpg);
+    background-size: cover;
+    color: $textColor;
+    font-family: 'Roboto Mono', monospace;
+    padding: 100px 0 200px 0;
+    text-align: center;
+    
+    h3{
+      i{
+        padding-right: 20px;
+      }
+      color: $primaryColor;
+      font-size: 2em;
+      line-height: 3em;
+    }
+    p{
+      color: $primaryColor;
+      font-size: 1.5em;
+      line-height: 1.5em;
+    }
+  }
+  
+  .javaScript{
+    display: flex;
+    flex-direction: column;
+    background-image: url(../../../public/img/pexels-sebastiaan-stam-1480690.jpg);
+    background-size: cover;
+    color: $textColor;
+    font-family: 'Roboto Mono', monospace;
+    padding: 150px 0 200px 0;
+    h3{
+      i{
+        padding-right: 20px;
+      }
+      padding-left: 100px;
+      font-size: 2em;
+      line-height: 3em;
+    }
+    p{
+      padding-left: 100px;
+      font-size: 1.5em;
+      line-height: 1.5em;
+    }
+  }
+  
+  .reactJs{
+    display: flex;
+    flex-direction: column;
+    background-image: url(../../../public/img/blog-thumb-1.png);
+    background-size: cover;
+    color: $textColor;
+    font-family: 'Roboto Mono', monospace;
+    padding: 100px 0 150px 0;
+    h3{
+      i{
+        padding-right: 20px;
+      }
+      padding-left: 100px;
+      font-size: 2em;
+      line-height: 3em;
+    }
+    p{
+      padding-left: 100px;
+      font-size: 1.5em;
+      line-height: 2.5em;
+    }
+  }
+  
+  .up{
+    position: fixed;
+    right: 30px;
+    top: 730px;
+    i{
+      color: #dbd1d1;
+      font-size: 3em;
+     
+    }
+  }
+  
+  
+  @media screen and (max-width: 900px) {
+    body{
+        background-color: $primaryColor;
+        background-image: none;
+       
+      }
+    
+  .up{
+    top: 380px;
+    i{
+      font-size: 2em;
+    }
+  }
+  
+  .partCurso{
+    width:90vw;
+  }
+  .cursoFrontEnd{
+    background-image: none;
+    background-color: $primaryColor;
+    h2{
+      padding: 50px 10px 30px 30px;
+      font-size: 1.8em;
+    }
+    a{
+      padding: 0 0 0 30px;
+      font-size: 1em;
+      line-height: 3em;
+    }
+  }
+
+  .desarrolloWeb{
+    h3{
+      font-size: 1.7em;
+    }
+    p{
+      font-size: 1em;
+    }
+  }
+  .javaScript{
+    padding: 90px 0 150px 0;
+    h3{
+      padding: 0 0 0 30px;
+      font-size: 1.7em;
+    }
+    p{
+      padding: 0 0 0 30px;
+      font-size: 1em;
+    }
+  }
+
+  .reactJs{
+    padding: 40px 0 150px 0;
+    h3{
+      padding: 0 0 0 30px;
+      font-size: 1.7em;
+    }
+    p{
+      padding: 0 0 0 30px;
+      font-size: 1em;
+    }
+  }
+
+}
+
+  

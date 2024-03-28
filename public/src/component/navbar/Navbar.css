@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+header {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px 0 30px 0;
+}
+header nav {
+  display: flex;
+}
+
+.hamburguer {
+  display: none;
+}
+
+.close {
+  display: none;
+}
+
+.nav-menu {
+  display: none;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+.title img {
+  width: 70px;
+  margin-right: 20px;
+}
+.title h1 {
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  font-size: 1.6em;
+  text-transform: uppercase;
+}
+.title p {
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  text-transform: lowercase;
+  text-align: center;
+}
+
+#close {
+  display: none;
+}
+
+#hamburguer {
+  display: none;
+}
+
+.btn {
+  font-size: 17px;
+  background: transparent;
+  border: none;
+  padding: 1em 1.5em;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #007ea7;
+  transition: 0.5s ease;
+}
+
+.btn:hover {
+  color: #00171f;
+  transition-delay: 0.5s;
+  z-index: 1;
+}
+
+.btn:hover::before {
+  width: 100%;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  background-color: #007ea7;
+  transition: 0.4s ease;
+  z-index: -1;
+}
+
+.btn:hover::after {
+  height: 100%;
+  transition-delay: 0.4s;
+  color: aliceblue;
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    background-color: #00171f;
+    background-image: none;
+  }
+  .title img {
+    width: 50px;
+  }
+  .title h1 {
+    font-size: 0.8em;
+  }
+  .title p {
+    font-size: 0.5em;
+  }
+  .buttons {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #003459;
+    padding: 0.6rem;
+    visibility: hidden;
+    z-index: 2;
+  }
+  .buttons a {
+    padding-top: 15px;
+  }
+  .buttons.visible {
+    visibility: visible;
+  }
+  #hamburguer {
+    display: block;
+    color: #fff;
+    font-size: 1.5em;
+  }
+  #close {
+    display: block;
+    color: #fff;
+    position: absolute;
+    font-size: 1.5rem;
+    right: 35px;
+  }
+}/*# sourceMappingURL=Navbar.css.map */

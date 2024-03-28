@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@100;400&display=swap");
+.mainPlataforma {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+  gap: 50px;
+}
+
+.cursosEnlace {
+  border: 2px solid #007ea7;
+  padding: 40px;
+  text-align: center;
+  font-size: 1.3em;
+  border-radius: 15px;
+  background: transparent;
+  color: #fff;
+}
+
+.perfilEnlace {
+  border: 2px solid #007ea7;
+  padding: 40px;
+  text-align: center;
+  font-size: 1.3em;
+  border-radius: 15px;
+  background: transparent;
+  color: #fff;
+}
+
+.wrapperAllCourses {
+  display: flex;
+}
+
+.wrapperCourses {
+  display: flex;
+  border: none;
+  margin: 30px;
+  padding: 30px;
+  background: rgb(20, 23, 36);
+  border-radius: 12px;
+  width: 300px;
+  height: 160px;
+}
+.wrapperCourses a {
+  text-decoration: none;
+  color: #fff;
+}/*# sourceMappingURL=plataforma.css.map */
