@@ -2,28 +2,65 @@
 import express from 'express';
 import multer from "multer";
 import bcrypt from 'bcryptjs'
+import sharp from 'sharp';
+import {mkdir, existsSync} from 'fs'
 import registroModel from "../models/register.model.js";
 import { createAccessToken } from '../libs/jwt.js';
 import { authRequired } from '../middlewares/validateToken.js';
 import { verifyToken } from './auth.controller.js';
 
+
+
 // Crear un enrutador de Express
 const router=express.Router();
+
 
 
 // Configurar el almacenamiento para multer
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-      cb(null, '/src/documentacion/') // Directorio donde se almacenarán los archivos
+    let dni;
+    
+    // Obtener el número de DNI según el tipo de solicitud
+    if (req.method === 'POST' && req.body && req.body.dni) {
+      dni = req.body.dni;
+    } else if (req.method === 'PUT' && req.params && req.params.dni) {
+      dni = req.params.dni;
+    } else {
+      return cb(new Error('No se proporcionó el número de DNI en la solicitud'), null);
+    }
+    // Crear una carpeta por cada usuario utilizando el DNI como nombre de la carpeta
+    const dniFolder = `src/documentacion/${dni}/`; 
+    // Comprobar si la carpeta del usuario ya existe
+    if (!existsSync(dniFolder)) { // Utilizar existsSync para comprobar si la carpeta existe
+      // Si no existe, crear la carpeta
+      mkdir(dniFolder, { recursive: true }, (err) => { // Utilizar mkdir para crear la carpeta de forma asíncrona
+        if (err) {
+          console.error('Error al crear la carpeta:', err);
+          cb(err, null);
+        } else {
+          cb(null, dniFolder);
+        }
+      });
+    } else {
+      cb(null, dniFolder);
+    }
   },
+  
+  // Función para generar el nombre de archivo
   filename: function(req, file, cb) {
-      const dni = req.body.dni; 
-      const fileType = file.fieldname;
-      const filename = `${dni}_${fileType}.jpg`;
-        cb(null, filename);
+    const fileType = file.fieldname;
+    const extension = getFileExtension(file.originalname);
+
+    const filename = `${fileType}.${extension}`
+    cb(null, filename);
   }
-      
 });
+
+// Función para obtener la extensión de un archivo
+function getFileExtension(filename) {
+  return filename.split('.').pop();
+}
 
 // Configurar multer con el almacenamiento y límites definidos
 const uploader = multer({
@@ -33,11 +70,49 @@ const uploader = multer({
   }
 })
 
+// Middleware para procesar la carga de imágenes
+const processImageUpload = async (req, res, next) => {
+  // Verificar si se proporcionaron imágenes de frente y dorso
+  if (req.files && req.files['frente'] && req.files['dorso'] && req.files['avatar']) {
+    try {
+      // Procesar y guardar la imagen de frente
+      const frenteBuffer = req.files['frente'][0].buffer;
+      await sharp(frenteBuffer)
+        .resize({ width: 500, height: 500 })
+        .toFile(`/${req.body.dni}/frente.jpg`);
+
+      // Procesar y guardar la imagen de dorso
+      const dorsoBuffer = req.files['dorso'][0].buffer;
+      await sharp(dorsoBuffer)
+        .resize({ width: 500, height: 500 })
+        .toFile(`/${req.body.dni}/dorso.jpg`);
+
+      // Procesar y guardar la imagen de avatar
+        const avatarBuffer = req.files['avatar'][0].buffer;
+        await sharp(avatarBuffer)
+          .resize({ width: 500, height: 500 })
+          .toFile(`/${req.body.dni}/avatar.jpg`);
+
+        
+      // Continuar con el siguiente middleware/ruta
+      next();
+    } catch (error) {
+      console.error('Error al procesar las imágenes:', error);
+      res.status(500).json({ message: 'Error interno del servidor al procesar las imágenes' });
+    }
+  } else {
+    // Si no se proporcionaron imágenes, continuar con el siguiente middleware/ruta
+    next();
+  }
+};
+
 
 // Ruta para obtener todos los usuarios
 router.get('/users', async (req, res) => {
     try {
       const users = await registroModel.find();
+
+      // Enviar una respuesta con estado 200 y los resultados paginados
       res.status(200).json(users);
     } catch (error) {
       console.error("Error al obtener usuarios:", error);
@@ -50,10 +125,9 @@ router.get('/users/:dni', async(req, res) =>{
     try {
       const dni = req.params.dni
       const alumno = await registroModel.findOne({dni})
+        .populate('courses.course')
       console.log(alumno)
-      if(!alumno.avatar){
-        alumno.avatar = '/img/avatar.png';
-      }
+
       res.status(200).json(alumno)
     } catch (error){
       console.error("Error al obtener usuario:", error);
@@ -89,23 +163,44 @@ router.get('/users/delete/:dni', async(req, res) => {
 })
 
 // Ruta para actualizar un usuario por su DNI
-router.put('/users/:dni', async(req, res) =>{
-  try {
-    const userDni = req.params.dni;
-    const updatedUser = await registroModel.findOneAndUpdate({"dni": userDni}, req.body);
-    console.log(updatedUser)
-    res.status(200).json({message: "Se actualizo correctamente", user: updatedUser})
-  } catch (error) {
-    console.error("Error al actualizar datos", error);
-    res.status(500).json({message: "Internal server error"})
-  }
- 
+router.put('/users/:dni', uploader.fields(
+  [{ name: 'avatar', maxCount: 1 }, 
+   { name: 'frente', maxCount: 1 }, 
+   { name: 'dorso', maxCount: 1 }]), 
+   processImageUpload, async (req, res) => {
+    const {dni} = req.params;
 
-});
+    try {
+      const updates = { ...req.body };
+      // Verificar si se proporcionaron nuevas imágenes y actualizar los nombres de archivo correspondientes
+      if (req.files) {
+        if (req.files['avatar']) updates.avatar = req.files['avatar'][0].filename;
+        if (req.files['frente']) updates.frente = req.files['frente'][0].filename;
+        if (req.files['dorso']) updates.dorso = req.files['dorso'][0].filename;
+      }
+  
+      // Actualizar el usuario en la base de datos
+      const updatedUser = await registroModel.findOneAndUpdate(
+        { dni: dni },
+        updates,
+        { new: true } // Devolver el usuario actualizado en lugar del usuario antes de la actualización
+      );
+  
+      if (!updatedUser) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+  
+      // Respuesta exitosa
+      res.status(200).json({ message: "Usuario actualizado correctamente", user: updatedUser });
+    } catch (error) {
+      console.error("Error al actualizar datos:", error);
+      res.status(500).json({ message: "Error interno del servidor al actualizar datos" });
+    }
+  });
 
 // Ruta para crear un nuevo usuario
-router.post('/users', uploader.fields([{name:'frente', maxCount:1}, {name:'dorso', maxCount:1}]), async (req, res) => {
-    
+router.post('/users', uploader.fields([{name:'frente', maxCount:1}, {name:'dorso', maxCount:1}]), processImageUpload, async (req, res) => {
+  // Extraer datos del cuerpo de la solicitud
   const {nombre, apellido, dni, domicilio, celular, fechaNacimiento, email, password} = req.body;
   const frente = req.files['frente'] ? req.files['frente'][0].filename : null; 
   const dorso = req.files['dorso'] ? req.files['dorso'][0].filename: null;
@@ -138,8 +233,9 @@ router.post('/users', uploader.fields([{name:'frente', maxCount:1}, {name:'dorso
         dorso,
 
       });
-      
-      await newUser.save();// Guardar el nuevo usuario en la base de datos
+      // Guardar el nuevo usuario en la base de datos
+      await newUser.save();
+      // Respuesta exitosa
       res.status(201).json({ message: 'User created successfully', user: newUser});
     } catch (error) {
       console.error("Error al crear el usuario", error);
@@ -189,8 +285,8 @@ router.get('/verify', verifyToken)// Verificar token de acceso
 router.get('/profile', authRequired, async (req, res) => {
   try {
     // Buscar al usuario por su ID en la base de datos
-    const userFound = await registroModel.findById(req.user.id);
-
+    const userFound = await registroModel.findById(req.user.id)
+    .populate('courses.course')
     // Verificar si el usuario no fue encontrado
     if (!userFound) {
       return res.status(400).json({ message: "Usuario no encontrado" });
@@ -201,6 +297,15 @@ router.get('/profile', authRequired, async (req, res) => {
       id: userFound._id,
       nombre: userFound.nombre,
       apellido: userFound.apellido,
+      dni: userFound.dni,
+      domicilio: userFound.domicilio,
+      celular: userFound.celular,
+      fechaNacimiento: userFound.fechaNacimiento,
+      email: userFound.email,
+      role: userFound.role,
+      avatar: userFound.avatar,
+      nickname: userFound.nickname,
+      course: userFound.courses.map(course=> course.course)
     });
   } catch (error) {
     // Manejar cualquier error que pueda ocurrir durante la búsqueda del usuario
