@@ -6,6 +6,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import { Server as SocketServer } from 'socket.io';
 import http from 'http'
+import currentURL from './src/libs/currentURL.js';
 
 //Cargar las variable de entorno definidas en el archivo .env
 config()
@@ -13,14 +14,13 @@ config()
 //Server de socket para crear un chat
 const server = http.createServer(app)
 const io = new SocketServer(server, {
-    cors:{origin:"http://localhost:3000", credentials: true
+    cors:{origin:`${currentURL}`, credentials: true
     
 }})
 
 // Definir un objeto para mapear los IDs de usuario a los IDs de socket
 const userSocketMap = {};
 
-// Cuando un usuario inicia sesión  
 // Guardar el ID de socket del usuario en una estructura de datos
 io.on('connection', (socket) => {
     socket.on('login', (userId) => {
@@ -43,7 +43,15 @@ io.on('connection', (socket) => {
             io.emit('userDisconnected', userId);
             }
         });
-    });
+    
+
+    // Manejar el envío de un mensaje desde un cliente
+    socket.on('message', (message) => {
+    console.log('Mensaje recibido:', message);
+    // Reenviar el mensaje a todos los clientes
+    io.emit('message', message);
+  });
+});
 
 //Obtener la URI de la base de datos MongoDB desde las variables de entorno
 const MONGODB_URI=process.env.MONGODB_URI

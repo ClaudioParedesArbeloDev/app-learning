@@ -4,7 +4,7 @@ import cors from 'cors'; // Middleware para habilitar el intercambio de recursos
 import cookieParser from 'cookie-parser'; // Middleware para analizar cookies en las solicitudes HTTP
 import usersRoute from './src/controllers/users.controllers.js'
 import coursesRoute from './src/controllers/courses.controller.js'
-
+import currentURL from './src/libs/currentURL.js';
 
 // Creación de una instancia de la aplicación Express
 const app = express();
@@ -14,7 +14,7 @@ app.set('port', process.env.PORT || 8080);
 
 // Middleware para habilitar CORS
 app.use(cors({
-        origin:'http://localhost:3000',  credentials: true
+        origin:`${currentURL}`,  credentials: true
        
 }));
 
@@ -27,7 +27,7 @@ app.use(cookieParser());
 
 // Rutas Estaticas
 app.use('/', express.static('./src/public'))
-app.use('/', express.static('./src/documentacion'))
+app.use('/', express.static('./public/img/documentacion'))
 
 // Middleware para analizar los cuerpos de las solicitudes entrantes codificados en la URL
 app.use(express.urlencoded({extended: true}))

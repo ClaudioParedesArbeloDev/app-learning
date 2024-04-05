@@ -8,11 +8,17 @@ import registroModel from "../models/register.model.js";
 import { createAccessToken } from '../libs/jwt.js';
 import { authRequired } from '../middlewares/validateToken.js';
 import { verifyToken } from './auth.controller.js';
+import sendMail from './mail.controller.js';
+import { config } from 'dotenv';
+import crypto from 'crypto'
+import URL from '../libs/currentURL.js';
 
 
 
 // Crear un enrutador de Express
 const router=express.Router();
+
+config()
 
 
 
@@ -30,7 +36,7 @@ const storage = multer.diskStorage({
       return cb(new Error('No se proporcionó el número de DNI en la solicitud'), null);
     }
     // Crear una carpeta por cada usuario utilizando el DNI como nombre de la carpeta
-    const dniFolder = `src/documentacion/${dni}/`; 
+    const dniFolder = `public/img/documentacion/${dni}/`; 
     // Comprobar si la carpeta del usuario ya existe
     if (!existsSync(dniFolder)) { // Utilizar existsSync para comprobar si la carpeta existe
       // Si no existe, crear la carpeta
@@ -311,6 +317,66 @@ router.get('/profile', authRequired, async (req, res) => {
     // Manejar cualquier error que pueda ocurrir durante la búsqueda del usuario
     console.error("Error al buscar el perfil del usuario:", error);
     return res.status(500).json({ message: "Error interno del servidor" });
+  }
+});
+
+//recuperacion contraseña
+router.post('/users/forgotPassword', async (req, res) =>{
+  const {dni} = req.body
+  try{
+    const user = await registroModel.findOne({dni})
+    if(!user){
+      return res.status(400).json({message: 'Usuario invalido'})
+    }
+    const resetToken = user.createResetPasswordToken();
+
+    await user.save({validateBeforeSave: false});
+   
+    const resetUrl = `${URL}/resetpassword/${resetToken}`
+    const message = `Hemos recibido una peticion de restablecimiento de contraseña, siga el siguiente link e introduzca su nueva contraseña\n\n${resetUrl}\n\nEste link estara disponible por 10 min.`
+    await sendMail({
+      email: user.email,
+      message: message
+    });
+    res.status(200).json({
+      status:'success',
+      message:'Link de restablecimiento de contraseña enviado'
+    })
+  }catch (error){
+    console.error("Error al obtener usuario:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.patch('/users/resetpassword/:token', async (req, res) => {
+  try {
+    const token = crypto.createHash('sha256').update(req.params.token).digest('hex');
+    const user = await registroModel.findOne({passwordResetToken: token, passwordResetTokenExpires: {$gt: Date.now()}});
+    
+    if (!user) {
+      return res.status(400).json({ message: 'Token inválido o expirado' });
+    }
+
+    const password =  req.body.password;
+
+    if (!password) {
+      return res.status(400).json({ message: 'La contraseña no puede estar vacía' });
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    
+    user.password = passwordHash;
+    user.passwordResetToken = undefined;
+    user.passwordResetTokenExpires = undefined;
+    await user.save();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Contraseña Restablecida'
+    });
+  } catch (error) {
+    console.error("Error al restablecer la contraseña:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
   }
 });
   
