@@ -140,7 +140,7 @@ const FichaIndividual = () => {
                 
                 <section className="individualPage">
                     <div className="wrapperIndividual">
-                    <img src={user.avatar ? `${CurrentURL}/${user.dni}/${user.avatar}` : `${CurrentURL}/img/avatar.png`} alt="avatar" className="avatar"/>
+                    <img src={user.avatar ? `${CurrentURL}/img/${user.dni}/${user.avatar}` : `${CurrentURL}/img/avatar.png`} alt="avatar" className="avatar"/>
 
                         <div className="tablaGeneral">
                             <div className="encabezadosIndividuo">

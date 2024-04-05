@@ -45,3 +45,16 @@
         color: $textColor;
     }
 }
+
+.buttonAdmin{
+    display: flex;
+    margin-left: 20px;
+    a{
+        text-decoration: none;
+        padding: 15px;
+        border-radius: 12px;
+        background: rgb(20, 23, 36);
+        color: $textColor;
+        margin: 10px;
+    }
+}

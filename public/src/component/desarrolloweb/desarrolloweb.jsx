@@ -34,10 +34,14 @@ const Desarrolloweb = () => {
                 {clase.contenido && clase.contenido.map((contenido, index) => (
                     <div className='wrapperClasses' key={index}>
                         <p className='tituloClase'>{contenido.title}</p>
-                        <Link className='grabacionClaseLunes' to={contenido.video1}><p>video lunes</p></Link>
-                        <Link className='grabacionClaseMartes' to={contenido.video2}><p>video martes</p></Link>
-                        <Link className='materialClase' to={contenido.powerPoint}><p>PowerPoint</p></Link>
-                        <Link className='pdfClase' to={contenido.pdf}><p>pdf</p></Link>
+                        {!contenido.video1 ? <></>:
+                        <Link className='grabacionClaseLunes' to={contenido.video1} target='_blank'><p>video lunes</p></Link>}
+                        {!contenido.video2 ? <></> :
+                        <Link className='grabacionClaseMartes' to={contenido.video2} target='_blank'><p>video martes</p></Link>}
+                        {!contenido.powerPoint ? <p></p> :
+                        <Link className='materialClase' to={contenido.powerPoint} target='_blank'><p>PowerPoint</p></Link>}
+                        {!contenido.pdf ? <></> :
+                        <Link className='pdfClase' to={contenido.pdf} target='_blank'><p>pdf</p></Link>}
                     </div>
                 ))}
                 

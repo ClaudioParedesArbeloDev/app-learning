@@ -43,4 +43,17 @@
 .wrapperCourses a {
   text-decoration: none;
   color: #fff;
+}
+
+.buttonAdmin {
+  display: flex;
+  margin-left: 20px;
+}
+.buttonAdmin a {
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgb(20, 23, 36);
+  color: #fff;
+  margin: 10px;
 }/*# sourceMappingURL=plataforma.css.map */

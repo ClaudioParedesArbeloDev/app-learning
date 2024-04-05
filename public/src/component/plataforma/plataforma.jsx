@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { CurrentURL } from '../../api/url';
 
 //Estilos
@@ -28,7 +28,7 @@ const PlataformaComponent = () => {
 
                 // Si la respuesta no es 304, actualiza los datos del usuario
                 setUser(response.data);
-                console.log(response.data)
+                
             } catch (error) {
                 console.error('Error al cargar el usuario:', error);
             }
@@ -48,7 +48,7 @@ const PlataformaComponent = () => {
         </div>
 
         <h3>{`Hola ${user.nickname ? user.nickname : user.nombre}`}</h3>
-        
+        {!user.course ? <></> :
         <div className='wrapperAllCourses'>
             {user.course && user.course.map((course, index) => (
                 
@@ -62,7 +62,14 @@ const PlataformaComponent = () => {
                 </div>
                 
             ))}
-        </div>
+        </div>}
+
+        {user.role === "admin" ? 
+        <div className='buttonAdmin'>
+        <Link to="/plataforma/clases">Clases</Link>
+        <Link to="/listado">Listado</Link>
+        </div> 
+        : <></>}
         
         </main>
         

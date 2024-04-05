@@ -21,12 +21,14 @@ import Javascript from '../component/javascript/javascript';
 import Reactjs from '../component/reactjs/reactjs';
 import ChatComponent from '../component/chat/chat';
 import Clases from '../component/clases/clases';
+import ResPassword from '../component/resPassword/respassword';
 import ProtectedRoute from './ProtectedRoute';
-
-
+import Contrasena from '../component/contrasena/contrasena';
+import ResetPassword from '../component/resetpassword/resetpassword';
 
 //Estilos
 import './app.css';
+
 
 // Layout para componentes con Navbar y Footer
 const Layout = ({ children }) => (
@@ -73,9 +75,21 @@ const App = () => {
               path="/registro"
               element={<Layout><Registro /></Layout>}
             />
+             <Route
+              path="/respassword"
+              element={<Layout><ResPassword /></Layout>}
+            />
+            <Route
+              path="/resetpassword/:token"
+              element={<Layout><ResetPassword  /></Layout>}
+            />
             <Route
               path="/sucessreg"
               element={<Layout><SucessReg /></Layout>}
+            />
+            <Route
+              path="/contrasena"
+              element={<Layout><Contrasena /></Layout>}
             />
 
             <Route element={<ProtectedRoute/>}>
@@ -133,3 +147,6 @@ const App = () => {
   };
   
   export default App;
+
+
+ 

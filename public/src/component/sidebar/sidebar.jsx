@@ -40,7 +40,7 @@ const Sidebar = ({children}) => {
 
                 // Si la respuesta no es 304, actualiza los datos del usuario
                 setUser(response.data);
-                setAvatarUrl(response.data.avatar ? `${CurrentURL}/documentacion/${response.data.dni}/${response.data.avatar}` : `${CurrentURL}/img/avatar.png`);
+                setAvatarUrl(response.data.avatar ? `${CurrentURL}/img/documentacion/${response.data.dni}/${response.data.avatar}` : `${CurrentURL}/img/avatar.png`);
             } catch (error) {
                 console.error('Error al cargar el usuario:', error);
             }
@@ -63,7 +63,7 @@ const Sidebar = ({children}) => {
         },
     
     
-       /*  {
+        {
         path:"/chat",
         name:"chat",
         icon:<FaCommentDots />
@@ -72,7 +72,7 @@ const Sidebar = ({children}) => {
         path:"/notificaciones",
         name:"notificaciones",
         icon:<FaBell />
-        }, */
+        },
     ]
     return(
         <div className='containerSidebar'>
