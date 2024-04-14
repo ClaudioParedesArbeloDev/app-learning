@@ -7,6 +7,7 @@ import MongoStore from 'connect-mongo';
 import { Server as SocketServer } from 'socket.io';
 import http from 'http'
 import currentURL from './src/libs/currentURL.js';
+import mensajeModel from './src/models/chat.model.js'
 
 //Cargar las variable de entorno definidas en el archivo .env
 config()
@@ -14,18 +15,20 @@ config()
 //Server de socket para crear un chat
 const server = http.createServer(app)
 const io = new SocketServer(server, {
-    cors:{origin:`${currentURL}`, credentials: true
+    cors:{
+        origin:`${currentURL}`, 
+        
     
 }})
 
-// Definir un objeto para mapear los IDs de usuario a los IDs de socket
-const userSocketMap = {};
+const userSocketMap = {}; // Estructura para mapear IDs de usuario a IDs de socket
 
-// Guardar el ID de socket del usuario en una estructura de datos
 io.on('connection', (socket) => {
+   // Manejo de inicio de sesión de usuario
     socket.on('login', (userId) => {
+         // Guardar el ID de socket del usuario en una estructura de datos
         userSocketMap[userId] = socket.id;
-        console.log('se conecto', userId)
+        console.log('Usuario conectado:', userId)
         // Emitir evento para actualizar clientes sobre los usuarios conectados
        io.emit('userConnected', userId);
     });
@@ -43,15 +46,28 @@ io.on('connection', (socket) => {
             io.emit('userDisconnected', userId);
             }
         });
+    // Manejo de inicio de sesión de usuario
+    socket.on('chat_message', (data) => {
+        console.log(data)
+        // Guardar el mensaje en la base de datos
+        const newMessage = new mensajeModel({
+            usuario: data.usuario,
+            mensaje: data.mensaje
+        })
+        newMessage.save()
+        .then(() => {
+            socket.broadcast.emit('chat_message', data); // Emite el mensaje a todos los clientes
+        })
+        .catch((error) => {
+          console.error('Error al guardar el mensaje:', error);
+        });
     
 
-    // Manejar el envío de un mensaje desde un cliente
-    socket.on('message', (message) => {
-    console.log('Mensaje recibido:', message);
-    // Reenviar el mensaje a todos los clientes
-    io.emit('message', message);
-  });
-});
+    })
+
+        
+        
+})
 
 //Obtener la URI de la base de datos MongoDB desde las variables de entorno
 const MONGODB_URI=process.env.MONGODB_URI
@@ -85,6 +101,7 @@ mongoose.connect(MONGODB_URI, { dbName })
     server.listen(port, () => {
         console.log('server is running on port', port);
     });
+   
 })  .catch (error => {
     console.error('No se pudo conectar a la base de datos:', error)
     });

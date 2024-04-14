@@ -28,6 +28,7 @@ app.use(cookieParser());
 // Rutas Estaticas
 app.use('/', express.static('./src/public'))
 app.use('/', express.static('./public/img/documentacion'))
+app.use('/', express.static('./img/documentacion'))
 
 // Middleware para analizar los cuerpos de las solicitudes entrantes codificados en la URL
 app.use(express.urlencoded({extended: true}))

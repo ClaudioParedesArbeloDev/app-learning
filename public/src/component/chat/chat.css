@@ -27,6 +27,7 @@
   border: 2px solid #007ea7;
   border-radius: 7px;
   background: rgb(20, 23, 36);
+  overflow-y: auto;
   width: 90%;
   height: 700px;
   margin: 0 0 15px 0;
@@ -76,11 +77,25 @@
   height: 45%;
 }
 .wrapperUsers li {
+  display: flex;
+  align-items: center;
   padding: 5px 0 5px 0;
   list-style: none;
 }
-.wrapperUsers li img {
+
+.wrapperImg {
   width: 30px;
+  height: 30px;
+  overflow: hidden;
+  margin: 0 5px;
+}
+.wrapperImg img {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
   margin-right: 15px;
 }
 

@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 import sharp from 'sharp';
 import {mkdir, existsSync} from 'fs'
 import registroModel from "../models/register.model.js";
+import mensajeModel from '../models/chat.model.js';
 import { createAccessToken } from '../libs/jwt.js';
 import { authRequired } from '../middlewares/validateToken.js';
 import { verifyToken } from './auth.controller.js';
@@ -379,5 +380,16 @@ router.patch('/users/resetpassword/:token', async (req, res) => {
     res.status(500).json({ message: "Error interno del servidor" });
   }
 });
-  
+
+router.get('/messages', async(req, res) =>{
+  try{
+    const mensajes = await mensajeModel.find().sort({ fecha: 1 }); // Ordena los mensajes por fecha ascendente
+    res.json(mensajes);
+  } catch (error) {
+    console.error('Error al obtener los mensajes:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
+    
 export default router;

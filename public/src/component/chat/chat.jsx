@@ -8,7 +8,7 @@ import { CurrentURL } from "../../api/url"; // URL actual del servidor
 import "./chat.css";
 
 // Establecemos la conexión con el servidor de Socket.IO
-const socket = io(CurrentURL);
+const socket = io('https://claudioparedes.site');
 
 // Definimos nuestro componente de chat
 function ChatComponent() {
@@ -18,6 +18,7 @@ function ChatComponent() {
   const [message, setMessage] = useState("");
   // Estado para almacenar los mensajes anteriores
   const [messages, setMessages] = useState([]);
+  
   // Estado para almacenar los usuarios
   const [users, setUsers] = useState([]);
   // Estado para almacenar la lista de usuarios conectados
@@ -62,9 +63,9 @@ function ChatComponent() {
         const response = await axios.get(`${CurrentURL}/api/users`, {
           withCredentials: true,
         });
-        const sortedUsers = response.data
-          .map((user) => ({...user, avatarUrl: user.avatar
-              ? `${CurrentURL}/${user.dni}/${user.avatar}`
+        const sortedUsers = response.data.map((user) => ({
+          ...user, avatarUrl: user.avatar
+              ? `${CurrentURL}/img/documentacion/${user.dni}/${user.avatar}`
               : `${CurrentURL}/img/avatar.png`,
             connected: user.online,
           }))
@@ -92,30 +93,48 @@ useEffect(() => {
     console.log('Usuarios conectados:', userId); 
   };
 
+  const handleUserDisconnected = (userId) => {
+    setConnectedUsers((prevUsers) => prevUsers.filter(user => user !== userId));
+    console.log('Usuario desconectado:', userId);
+  };
+
   socket.on("userConnected", handleUserConnected);
+  socket.on("userDisconnected", handleUserDisconnected);
 
   // Limpia el listener cuando el componente se desmonta
   return () => {
     socket.off("userConnected", handleUserConnected);
+    socket.off("userDisconnected", handleUserDisconnected);
   };
-}, [connectedUsers]); // Aunque no necesitas que este efecto se ejecute cada vez que connectedUsers cambie, no está mal tenerlo aquí
+}, []); 
 
-  // Manejar la desconexión de un usuario
-  useEffect(() => {
-    const handleUserDisconnected = (userId) => {
-      // Eliminar usuario de la lista de usuarios conectados
-      setConnectedUsers((prevUsers) => prevUsers.filter(user => user !== userId));
-      console.log('Usuario desconectado:', userId);
-    };
+useEffect(() => {
+  // Función para obtener todos los mensajes de chat
+  const fetchChatHistory = async () => {
+    try {
+      // Hacer una solicitud al servidor para obtener todos los mensajes de chat
+      const response = await axios.get(`${CurrentURL}/api/messages`, {
+        withCredentials: true,
+      });
+      // Verificar si hay mensajes disponibles
+      if (response.status === 304 || !response.data.length) {
+        console.log("No hay mensajes de chat disponibles.");
+        return;
+      }
+      // Actualizar el estado de los mensajes con la conversación anterior
+      setMessages(response.data);
+    } catch (error) {
+      console.error("Error al cargar la conversación anterior:", error);
+    }
+  };
 
-    socket.on("userDisconnected", handleUserDisconnected);
+  // Llamar a la función para obtener la conversación anterior al cargar el componente
+  fetchChatHistory();
+}, []);
 
-    // Limpia el listener cuando el componente se desmonta
-    return () => {
-      socket.off("userDisconnected", handleUserDisconnected);
-    };
-  }, [connectedUsers]); // Aunque no necesitas que este efecto se ejecute cada vez que connectedUsers cambie, no está mal tenerlo aquí
-
+useEffect(() => {
+  if (user.id) socket.emit("login", user.id);
+}, [user]);
 
 
   const handleSubmit = (e) => {
@@ -124,13 +143,14 @@ useEffect(() => {
     if (message.trim() === "") return;
     // Crear nuevo mensaje con el contenido y el nombre de usuario
     const newMessage = {
-      body: message,
-      from: user.nickname ? user.nickname : user.nombre,
+      mensaje: message,
+      usuario: user.nickname ? user.nickname : user.nombre,
     };
     // Agregar el nuevo mensaje a la lista de mensajes
     setMessages([...messages, newMessage]);
     // Enviar el mensaje al servidor Socket.IO
-    socket.emit("message", message);
+    socket.emit("chat_message", newMessage);
+    console.log(newMessage)
     // Limpiar el campo de entrada
     setMessage("");
     inputRef.current.value = "";
@@ -140,8 +160,8 @@ useEffect(() => {
   useEffect(() => {
     const receiveMessage = (message) =>
       setMessages((messages) => [...messages, message]);
-    socket.on("message", receiveMessage);
-    return () => socket.off("message", receiveMessage);
+    socket.on("chat_message", receiveMessage);
+    return () => socket.off("chat_message", receiveMessage);
   }, []);
 
   // Efecto que se ejecuta al emitir el evento de inicio de sesión del usuario
@@ -158,7 +178,7 @@ useEffect(() => {
           <ul className="chatLinea">
             {messages.map((message, i) => (
               <li key={i}>
-                {message.from}: {message.body}
+                {message.usuario}: {message.mensaje}
               </li>
             ))}
           </ul>
@@ -183,7 +203,10 @@ useEffect(() => {
               .map((user, index) => (
                 <li key={index}>
                   <span className="dot green"></span>
-                  <img src={user.avatarUrl} alt="" />{user.nickname ? user.nickname : user.nombre}
+                  <div className="wrapperImg">
+                    <img src={user.avatarUrl} alt="" />
+                  </div>
+                  {user.nickname ? user.nickname : user.nombre}
                 </li>
               ))}
           </div>
@@ -194,7 +217,9 @@ useEffect(() => {
               .map((user, index) => (
                 <li key={index}>
                   <span className="dot gray"></span>
-                  <img src={user.avatarUrl} alt="" />
+                  <div className="wrapperImg">
+                    <img src={user.avatarUrl} alt="" />
+                  </div>
                   {user.nickname ? user.nickname : user.nombre}
                 </li>
               ))}

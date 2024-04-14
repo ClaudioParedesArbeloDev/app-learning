@@ -1,7 +1,7 @@
 //Modulos
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { FaBars, FaUser,FaHome, FaCommentDots, FaBell  } from 'react-icons/fa';
+import { FaBars, FaUser,FaHome, FaCommentDots } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { CurrentURL } from '../../api/url';
@@ -68,11 +68,7 @@ const Sidebar = ({children}) => {
         name:"chat",
         icon:<FaCommentDots />
         },
-        {
-        path:"/notificaciones",
-        name:"notificaciones",
-        icon:<FaBell />
-        },
+    
     ]
     return(
         <div className='containerSidebar'>
